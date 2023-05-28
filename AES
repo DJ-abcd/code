@@ -1,0 +1,25 @@
+!pip install PyCryptodome
+
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad, unpad
+from Crypto.Random import get_random_bytes
+
+# Generate a random 256-bit key
+key = get_random_bytes(32)
+
+# Create an AES cipher object with the key and AES.MODE_ECB mode
+cipher = AES.new(key, AES.MODE_ECB)
+
+# Encrypt plaintext
+plaintext = b'hello'
+ciphertext = cipher.encrypt(pad(plaintext, AES.block_size))
+
+# Print the encrypted ciphertext
+print("Ciphertext:", ciphertext)
+
+# Decrypt the ciphertext
+decrypted = cipher.decrypt(ciphertext)
+decrypted = unpad(decrypted, AES.block_size)
+
+# Print the decrypted plaintext
+print("Decrypted:", decrypted.decode())
