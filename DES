@@ -1,0 +1,26 @@
+!pip install PyCryptodome
+
+
+from Crypto.Cipher import DES
+from Crypto.Util.Padding import pad, unpad
+from Crypto.Random import get_random_bytes
+
+# Generate a random 64-bit key
+key = get_random_bytes(8)
+
+# Create a DES cipher object with the key and DES.MODE_ECB mode
+cipher = DES.new(key, DES.MODE_ECB)
+
+# Encrypt plaintext
+plaintext = b'Hello, DES!'
+ciphertext = cipher.encrypt(pad(plaintext, DES.block_size))
+
+# Print the encrypted ciphertext
+print("Ciphertext:", ciphertext)
+
+# Decrypt the ciphertext
+decrypted = cipher.decrypt(ciphertext)
+decrypted = unpad(decrypted, DES.block_size)
+
+# Print the decrypted plaintext
+print("Decrypted:", decrypted.decode())
