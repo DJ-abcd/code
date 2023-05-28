@@ -1,0 +1,29 @@
+def generate_shared_secret(p, g, a, b):
+    # Alice's computation
+    A = (g ** a) % p
+
+    # Bob's computation
+    B = (g ** b) % p
+
+    # Shared secret computation
+    shared_secret_Alice = (B ** a) % p
+    shared_secret_Bob = (A ** b) % p
+
+    return shared_secret_Alice, shared_secret_Bob
+
+# Shared prime number and base
+p = 23
+g = 5
+
+# Alice's private key
+private_key_Alice = 6
+
+# Bob's private key
+private_key_Bob = 15
+
+# Generate shared secret
+shared_secret_Alice, shared_secret_Bob = generate_shared_secret(p, g, private_key_Alice, private_key_Bob)
+
+# Print the shared secret
+print("Shared Secret (Alice):", shared_secret_Alice)
+print("Shared Secret (Bob):", shared_secret_Bob)
